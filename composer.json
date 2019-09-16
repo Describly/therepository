@@ -1,6 +1,6 @@
 {
-	"name": "integration/better-noi",
-	"description": "Integration package for Better NOI",
+	"name": "thenandan/therepository",
+	"description": "Awesome Laravel Repository",
 	"type": "library",
 	"license": "proprietary",
 	"authors": [
