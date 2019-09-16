@@ -1,0 +1,36 @@
+# This is the top-most .editorconfig file; do not search in parent directories.
+
+# top-most EditorConfig file
+root = true
+
+# All files.
+[*]
+end_of_line = LF
+indent_style = space
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length=135
+
+[composer.json]
+indent_style = tab
+indent_size = 6
+
+[*.php]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+control_space_after = true
+function_space_after = false
+control_space_parens = false
+blank_line_after_php = true
+spaces_around_operators = false
+
+[*.scss]
+indent_style = space
+indent_size = 2
+
+[*.yml]
+indent_style = space
+indent_size = 2
