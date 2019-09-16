@@ -11,16 +11,6 @@
 	],
 	"minimum-stability": "stable",
 	"prefer-stable": true,
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://gitlab-token.gitlab.com:Msrb-H9MghjLm6FEp7wz@gitlab.com/expedien-clients/karya/packages/laravel/framework.git"
-		},
-		{
-			"type": "vcs",
-			"url": "https://gitlab-token.gitlab.com:Msrb-H9MghjLm6FEp7wz@gitlab.com/expedien-clients/karya/packages/laravel/data.git"
-		}
-	],
 	"config": {
 		"platform": {
 			"php": "7.2"
@@ -39,90 +29,8 @@
 	},
 	"require": {
 		"php": ">=7.2",
-		"composer/installers": "^1.2",
-		"benzene/framework": "^v1.0.181",
-		"benzene/data": "^v1.0.106",
-		"vyuldashev/xml-to-array": "^1.0",
-		"goetas-webservices/xsd2php-runtime": "^0.2.2",
-		"indigophp/doctrine-annotation-autoload": "^0.1.0"
+		"illuminate/support": "^5.5|^6"
 	},
 	"require-dev": {
-		"orchestra/testbench": "~3.0",
-		"mockery/mockery": "^1.0",
-		"phpunit/phpunit": "^7.0",
-		"phpunit/php-code-coverage": "^6.0",
-		"friendsofphp/php-cs-fixer": "^2.0",
-		"phpmd/phpmd": "@stable",
-		"phpstan/phpstan": "^0.10.3",
-		"nunomaduro/collision": "^2.0",
-		"sebastian/phpcpd": "^4.0@dev",
-		"webysther/composer-plugin-qa": "~1.0",
-		"webysther/composer-meta-qa": "~1.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"Integration\\Betternoi\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"classmap": [
-			"tests"
-		],
-		"psr-4": {
-			"Integration\\Betternoi\\Tests\\": "tests/"
-		}
-	},
-	"extra": {
-		"laravel": {
-			"providers": [
-				"Integration\\Betternoi\\ScreeningServiceProvider"
-			]
-		}
-	},
-	"archive": {
-		"exclude": [
-			"!vendor/*",
-			"!public/*",
-			"dist/",
-			".gitlab",
-			"scripts/",
-			".git"
-		]
-	},
-	"scripts": {
-		"clean": [
-			"Benzene\\Framework\\Composer\\ComposerExtender::cleanup"
-		],
-		"build": [
-			"@clean",
-			"composer install --no-suggest",
-			"composer dump-autoload"
-		],
-		"test": [
-			"composer dump-autoload",
-			"Benzene\\Framework\\Composer\\ComposerExtender::deleteTestCoverage",
-			"phpunit --coverage-html docs/quality_report/test_coverage"
-		],
-		"quality": [
-			"php-cs-fixer fix src --diff --rules=@PSR2",
-			"phpstan analyse -l 7 src ",
-			"vendor/bin/phpmd src html phpmd.ruleset.xml --reportfile docs/quality_report/phpmd.html --ignore-violations-on-exit",
-			"vendor/bin/phpcpd src --log-pmd docs/quality_report/phpcpd.xml --min-lines=3 --min-tokens=4 || true",
-			"@test"
-		],
-		"package": [
-			"mkdir dist",
-			"@build",
-			"composer archive --dir=dist/ --format=zip",
-			"composer dump-autoload"
-		],
-		"setup-local": [
-			"echo Setting up Local environment",
-			"@build"
-		],
-		"build-local": [
-			"composer update --no-suggest",
-			"composer dump-autoload"
-		]
 	}
 }
