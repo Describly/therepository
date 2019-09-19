@@ -2,18 +2,17 @@
 
 namespace TheNandan\TheRepository\Repository;
 
-use TheNandan\TheRepository\Contracts\TheDefinitionContract;
+use TheNandan\TheRepository\Contracts\TheManipulationContract;
 
 /**
  * Class TheRepository
  *
  * @package TheNandan\TheRepository\Repository
  */
-class TheDefinition implements TheDefinitionContract
+class TheRepository implements TheManipulationContract
 {
-
     /**
-     * This method returns the collection of the result
+     * Returns the collection of objects
      *
      * @param array $columns
      *
@@ -25,7 +24,7 @@ class TheDefinition implements TheDefinitionContract
     }
 
     /**
-     * This method return the instance of the model object
+     * Returns the object
      *
      * @param array $columns
      *
