@@ -56,10 +56,6 @@ Homestead.json
 # Package development
 packages/
 
-
-# Rocketeer PHP task runner and deployment package
-.rocketeer/
-
 dist
 
 .php_cs.cache
