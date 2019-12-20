@@ -14,7 +14,7 @@
 	"prefer-stable": true,
 	"config": {
 		"platform": {
-			"php": "7.1"
+			"php": "^7.1"
 		},
 		"secure-http": false,
 		"preferred-install": {
@@ -30,7 +30,8 @@
 	},
 	"require": {
 		"php": ">=7.1",
-		"illuminate/support": "^5.5|^6"
+		"illuminate/support": "^5.5|^6",
+		"laravel/framework": "5.7.*"
 	},
 	"require-dev": {
 	}
