@@ -2,6 +2,7 @@
 
 namespace TheNandan\TheRepository\Repository;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use TheNandan\TheRepository\Contracts\TheManipulationContract;
 
@@ -13,7 +14,7 @@ use TheNandan\TheRepository\Contracts\TheManipulationContract;
 abstract class TheRepository implements TheManipulationContract
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder
+     * @var Builder
      */
     private $queryBuilder;
 
@@ -29,7 +30,7 @@ abstract class TheRepository implements TheManipulationContract
     public function __construct(Model $model)
     {
         $this->model = $model;
-        $this->queryBuilder = $model->newQuery();
+        $this->setQueryBuilder($model);
     }
 
     /**
@@ -37,11 +38,7 @@ abstract class TheRepository implements TheManipulationContract
      */
     public function getQueryBuilder()
     {
-        $builder = $this->queryBuilder;
-        if ($builder instanceof Model) {
-            return $builder->newQuery();
-        }
-        return $builder;
+        return $this->queryBuilder;
     }
 
     /**
@@ -55,7 +52,7 @@ abstract class TheRepository implements TheManipulationContract
     }
 
     /**
-     *
+     * 
      */
     private function resetQueryBuilder(): void
     {
