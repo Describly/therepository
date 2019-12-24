@@ -11,7 +11,7 @@ use TheNandan\TheRepository\Contracts\TheManipulationContract;
  *
  * @package TheNandan\TheRepository\Repository
  */
-abstract class TheRepository implements TheManipulationContract
+class TheRepository implements TheManipulationContract
 {
     /**
      * @var Builder
@@ -36,7 +36,7 @@ abstract class TheRepository implements TheManipulationContract
     /**
      * @return mixed
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder(): Builder
     {
         return $this->queryBuilder;
     }
@@ -52,7 +52,7 @@ abstract class TheRepository implements TheManipulationContract
     }
 
     /**
-     * 
+     *
      */
     private function resetQueryBuilder(): void
     {

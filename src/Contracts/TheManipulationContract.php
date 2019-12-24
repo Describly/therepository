@@ -9,5 +9,4 @@ namespace TheNandan\TheRepository\Contracts;
  */
 interface TheManipulationContract
 {
-
 }
