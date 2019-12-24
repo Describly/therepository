@@ -2,6 +2,7 @@
 
 namespace TheNandan\TheRepository\Repository;
 
+use Illuminate\Database\Eloquent\Model;
 use TheNandan\TheRepository\Contracts\TheManipulationContract;
 
 /**
@@ -9,29 +10,74 @@ use TheNandan\TheRepository\Contracts\TheManipulationContract;
  *
  * @package TheNandan\TheRepository\Repository
  */
-class TheRepository implements TheManipulationContract
+abstract class TheRepository implements TheManipulationContract
 {
     /**
-     * Returns the collection of objects
-     *
-     * @param array $columns
-     *
-     * @return mixed
+     * @var \Illuminate\Database\Eloquent\Builder
      */
-    public function get($columns = ['*'])
+    private $queryBuilder;
+
+    /**
+     * @var $model
+     */
+    private $model;
+
+    /**
+     * TheRepository constructor.
+     * @param Model $model
+     */
+    public function __construct(Model $model)
     {
-        // TODO: Implement get() method.
+        $this->model = $model;
+        $this->queryBuilder = $model->newQuery();
     }
 
     /**
-     * Returns the object
-     *
-     * @param array $columns
+     * @return mixed
+     */
+    public function getQueryBuilder()
+    {
+        $builder = $this->queryBuilder;
+        if ($builder instanceof Model) {
+            return $builder->newQuery();
+        }
+        return $builder;
+    }
+
+    /**
+     * @param $queryBuilder
      *
      * @return mixed
      */
-    public function first($columns = ['*'])
+    public function setQueryBuilder($queryBuilder)
     {
-        // TODO: Implement first() method.
+        return $this->queryBuilder = $queryBuilder;
+    }
+
+    /**
+     *
+     */
+    private function resetQueryBuilder(): void
+    {
+        $this->setQueryBuilder($this->getModel());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModel(): Model
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param Model $model
+     *
+     * @return $this
+     */
+    protected function setModel(Model $model): self
+    {
+        $this->model = $model;
+        return $this;
     }
 }

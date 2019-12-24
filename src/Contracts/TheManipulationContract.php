@@ -9,21 +9,5 @@ namespace TheNandan\TheRepository\Contracts;
  */
 interface TheManipulationContract
 {
-    /**
-     * Returns the collection of objects
-     *
-     * @param array $columns
-     *
-     * @return mixed
-     */
-    public function get($columns = ['*']);
 
-    /**
-     * Returns the object
-     *
-     * @param array $columns
-     *
-     * @return mixed
-     */
-    public function first($columns = ['*']);
 }

@@ -2,11 +2,7 @@
 
 namespace TheNandan\TheRepository;
 
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
-use Integration\Betternoi\Http\Middleware\CallbackRequestLogger;
-use Integration\Betternoi\Provider\RouteServiceProvider;
-use Integration\Betternoi\Provider\ScreeningIntegrationServiceProvider;
 
 /**
  * Class TheRepositoryServiceProvider
