@@ -4,14 +4,16 @@ namespace TheNandan\TheRepository\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use TheNandan\TheRepository\Contracts\TheManipulationContract;
+use TheNandan\TheRepository\Contracts\TheQueryContract;
 
 /**
  * Class TheRepository
  *
  * @package TheNandan\TheRepository\Repository
  */
-class TheRepository implements TheManipulationContract
+abstract class TheRepository implements TheManipulationContract, TheQueryContract
 {
     /**
      * @var Builder
@@ -52,7 +54,7 @@ class TheRepository implements TheManipulationContract
     }
 
     /**
-     *
+     * This method reset the query builder
      */
     private function resetQueryBuilder(): void
     {
@@ -76,5 +78,85 @@ class TheRepository implements TheManipulationContract
     {
         $this->model = $model;
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all($columns = ['*']): Collection
+    {
+        $result = $this->getQueryBuilder()->get($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function first($columns = ['*']): ?Model
+    {
+        $result = $this->getQueryBuilder()->first($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function paginate($perPage = 20, $columns = ['*'])
+    {
+        $result = $this->getQueryBuilder()->paginate($perPage, $columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getById($id, $columns = ['*']): ?Model
+    {
+        $result = $this->getQueryBuilder()->where('id', $id)->first($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findByKey($key, $value, $columns = ['*']): ?Model
+    {
+        $result = $this->getQueryBuilder()->where($key, $value)->first($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findWhere(array $conditions = [], $columns = ['*']): Collection
+    {
+        $result = $this->getQueryBuilder()->where($conditions)->get($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findWhereIn($key, array $values = [], $columns = ['*'])
+    {
+        $result = $this->getQueryBuilder()->whereIn($key, $values)->get($columns);
+        $this->resetQueryBuilder();
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findWhereNotIn($key, array $values = [], $columns = ['*'])
+    {
+        $result = $this->getQueryBuilder()->whereIn($key, $values)->get($columns);
+        $this->resetQueryBuilder();
+        return $result;
     }
 }
