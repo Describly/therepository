@@ -3,7 +3,6 @@
 namespace TheNandan\TheRepository;
 
 use Illuminate\Support\ServiceProvider;
-use TheNandan\TheRepository\Console\Commands\CreateRepositoryCommand;
 
 /**
  * Class TheRepositoryServiceProvider
@@ -38,9 +37,9 @@ class TheRepositoryServiceProvider extends ServiceProvider
     private function registerCommands()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                CreateRepositoryCommand::class
-            ]);
+//            $this->commands([
+//                CreateRepositoryCommand::class
+//            ]);
         }
     }
 
