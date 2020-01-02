@@ -9,6 +9,5 @@ namespace TheNandan\TheRepository\Contracts;
  */
 interface TheControlContract
 {
-
 }
 

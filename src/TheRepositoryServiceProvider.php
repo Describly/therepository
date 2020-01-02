@@ -3,6 +3,7 @@
 namespace TheNandan\TheRepository;
 
 use Illuminate\Support\ServiceProvider;
+use TheNandan\TheRepository\Console\Commands\CreateRepositoryCommand;
 
 /**
  * Class TheRepositoryServiceProvider
@@ -16,7 +17,8 @@ class TheRepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Register commands
+        $this->registerCommands();
     }
 
     /**
@@ -28,6 +30,18 @@ class TheRepositoryServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'therepository');
+    }
+
+    /**
+     * This method register the console commands during the application boot process.
+     */
+    private function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateRepositoryCommand::class
+            ]);
+        }
     }
 
 }
