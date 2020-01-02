@@ -13,7 +13,7 @@ use TheNandan\TheRepository\Contracts\TheQueryContract;
  *
  * @package TheNandan\TheRepository\Repository
  */
-abstract class TheRepository implements TheManipulationContract, TheQueryContract
+abstract class BaseRepository implements TheManipulationContract, TheQueryContract
 {
     /**
      * @var Builder
