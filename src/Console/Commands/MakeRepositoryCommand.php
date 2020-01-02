@@ -37,6 +37,7 @@ class MakeRepositoryCommand extends GeneratorCommand
      */
     public function handle()
     {
+        $this->type = Str::studly(class_basename($this->argument('name')));
         parent::handle();
     }
 

@@ -54,7 +54,20 @@ abstract class BaseRepository implements TheManipulationContract, TheQueryContra
     }
 
     /**
+     * @param Model $model
+     *
+     * @return $this
+     */
+    protected function setModel(Model $model): self
+    {
+        $this->model = $model;
+        return $this;
+    }
+
+    /**
      * This method reset the query builder
+     *
+     * @return void
      */
     private function resetQueryBuilder(): void
     {
@@ -67,17 +80,6 @@ abstract class BaseRepository implements TheManipulationContract, TheQueryContra
     public function getModel(): Model
     {
         return $this->model;
-    }
-
-    /**
-     * @param Model $model
-     *
-     * @return $this
-     */
-    protected function setModel(Model $model): self
-    {
-        $this->model = $model;
-        return $this;
     }
 
     /**
