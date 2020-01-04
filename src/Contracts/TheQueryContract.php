@@ -65,31 +65,28 @@ interface TheQueryContract
      * This method return the rows for the given condition(s)
      *
      * @param array $conditions
-     * @param array $columns
      *
      * @return mixed
      */
-    public function findWhere(array $conditions = [], $columns = ['*']): Collection;
+    public function where(array $conditions = []);
 
     /**
      * This method return the rows if the key have matching values
      *
      * @param $key
      * @param array $values
-     * @param array $columns
      *
      * @return mixed
      */
-    public function findWhereIn($key, array $values = [], $columns = ['*']);
+    public function whereIn($key, array $values = []);
 
     /**
      * This method return the rows if the key does not have matching values
      *
      * @param $key
      * @param array $values
-     * @param array $columns
      *
      * @return mixed
      */
-    public function findWhereNotIn($key, array $values = [], $columns = ['*']);
+    public function whereNotIn($key, array $values = []);
 }

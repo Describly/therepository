@@ -135,30 +135,27 @@ abstract class BaseRepository implements TheManipulationContract, TheQueryContra
     /**
      * @inheritDoc
      */
-    public function findWhere(array $conditions = [], $columns = ['*']): Collection
+    public function where(array $conditions = [])
     {
-        $result = $this->getQueryBuilder()->where($conditions)->get($columns);
-        $this->resetQueryBuilder();
-        return $result;
+        $this->setQueryBuilder($this->getQueryBuilder()->where($conditions));
+        return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function findWhereIn($key, array $values = [], $columns = ['*'])
+    public function whereIn($key, array $values = [])
     {
-        $result = $this->getQueryBuilder()->whereIn($key, $values)->get($columns);
-        $this->resetQueryBuilder();
-        return $result;
+        $this->setQueryBuilder($this->getQueryBuilder()->whereIn($key, $values));
+        return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function findWhereNotIn($key, array $values = [], $columns = ['*'])
+    public function whereNotIn($key, array $values = [])
     {
-        $result = $this->getQueryBuilder()->whereIn($key, $values)->get($columns);
-        $this->resetQueryBuilder();
-        return $result;
+        $this->setQueryBuilder($this->getQueryBuilder()->whereNotIn($key, $values));
+        return $this;
     }
 }
