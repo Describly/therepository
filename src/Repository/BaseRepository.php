@@ -5,15 +5,14 @@ namespace TheNandan\TheRepository\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use TheNandan\TheRepository\Contracts\TheManipulationContract;
-use TheNandan\TheRepository\Contracts\TheQueryContract;
+use Closure;
 
 /**
  * Class TheRepository
  *
  * @package TheNandan\TheRepository\Repository
  */
-abstract class BaseRepository implements TheManipulationContract, TheQueryContract
+abstract class BaseRepository
 {
     /**
      * @var Builder
@@ -82,80 +81,198 @@ abstract class BaseRepository implements TheManipulationContract, TheQueryContra
         return $this->model;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function all($columns = ['*']): Collection
-    {
-        $result = $this->getQueryBuilder()->get($columns);
-        $this->resetQueryBuilder();
-        return $result;
-    }
+    /****************************** Conditional Methods ***************************/
+
+//    /**
+//     * @param $name
+//     * @param $arguments
+//     *
+//     * @return mixed
+//     */
+//    public function __call($name, $arguments)
+//    {
+//        return call_user_func_array([$this->getQueryBuilder(), $name], $arguments);
+//    }
 
     /**
-     * @inheritDoc
+     * @param $column
+     * @param null $operator
+     * @param null $value
+     *
+     * @return $this
      */
-    public function first($columns = ['*']): ?Model
+    public function condition($column, $operator = null, $value = null)
     {
-        $result = $this->getQueryBuilder()->first($columns);
-        $this->resetQueryBuilder();
-        return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function paginate($perPage = 20, $columns = ['*'])
-    {
-        $result = $this->getQueryBuilder()->paginate($perPage, $columns);
-        $this->resetQueryBuilder();
-        return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getById($id, $columns = ['*']): ?Model
-    {
-        $result = $this->getQueryBuilder()->where('id', $id)->first($columns);
-        $this->resetQueryBuilder();
-        return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function findByKey($key, $value, $columns = ['*']): ?Model
-    {
-        $result = $this->getQueryBuilder()->where($key, $value)->first($columns);
-        $this->resetQueryBuilder();
-        return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function where(array $conditions = [])
-    {
-        $this->setQueryBuilder($this->getQueryBuilder()->where($conditions));
+        $this->setQueryBuilder($this->getQueryBuilder()->where($column, $operator, $value));
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @param $column
+     * @param null $operator
+     * @param null $value
+     *
+     * @return $this
      */
-    public function whereIn($key, array $values = [])
+    public function orCondition($column, $operator = null, $value = null)
     {
-        $this->setQueryBuilder($this->getQueryBuilder()->whereIn($key, $values));
+        $this->setQueryBuilder($this->getQueryBuilder()->where($column, $operator, $value, 'or'));
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @param $column
+     * @param $values
+     *
+     * @return $this
      */
-    public function whereNotIn($key, array $values = [])
+    public function conditionIn($column, array $values)
     {
-        $this->setQueryBuilder($this->getQueryBuilder()->whereNotIn($key, $values));
+        $this->setQueryBuilder($this->getQueryBuilder()->whereIn($column, $values));
         return $this;
     }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function orConditionIn($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereIn($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function conditionNotIn($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->whereNotIn($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function orConditionNotIn($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereNotIn($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function conditionBetween($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->whereBetween($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function conditionNotBetween($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->whereNotBetween($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function orConditionBetween($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereBetween($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $column
+     * @param $values
+     *
+     * @return $this
+     */
+    public function orConditionNotBetween($column, array $values)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereNotBetween($column, $values));
+        return $this;
+    }
+
+    /**
+     * @param $relation
+     * @param Closure|null $callback
+     *
+     * @return $this
+     */
+    public function hasRelation($relation, Closure $callback = null)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->whereHas($relation, $callback));
+        return $this;
+    }
+
+    /**
+     * @param $relation
+     * @param Closure|null $callback
+     *
+     * @return $this
+     */
+    public function orHasRelation($relation, Closure $callback = null)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereHas($relation, $callback));
+        return $this;
+    }
+
+    /**
+     * @param $relation
+     * @param Closure|null $callback
+     *
+     * @return $this
+     */
+    public function hasNoRelation($relation, Closure $callback = null)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->whereDoesntHave($relation, $callback));
+        return $this;
+    }
+
+    /**
+     * @param $relation
+     * @param Closure|null $callback
+     *
+     * @return $this
+     */
+    public function orHasNoRelation($relation, Closure $callback = null)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orWhereDoesntHave($relation, $callback));
+        return $this;
+    }
+
+    /**
+     * @param Closure $closure
+     * 
+     * @return $this
+     */
+    public function callback(Closure $closure)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->where($closure));
+        return $this;
+    }
+
 }
