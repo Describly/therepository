@@ -81,19 +81,6 @@ abstract class BaseRepository
         return $this->model;
     }
 
-    /****************************** Conditional Methods ***************************/
-
-//    /**
-//     * @param $name
-//     * @param $arguments
-//     *
-//     * @return mixed
-//     */
-//    public function __call($name, $arguments)
-//    {
-//        return call_user_func_array([$this->getQueryBuilder(), $name], $arguments);
-//    }
-
     /**
      * @param $column
      * @param null $operator
@@ -275,4 +262,50 @@ abstract class BaseRepository
         return $this;
     }
 
+    /**
+     * @param array $columns
+     * @return mixed
+     */
+    public function create(array $columns)
+    {
+        return $this->getModel()->create($columns);
+    }
+
+    /**
+     * @param array $columns
+     * @return mixed
+     */
+    public function createMultiple(array $columns)
+    {
+        return $this->getModel()->insert($columns);
+    }
+
+    /**
+     * @param array $conditions
+     * @param array $columns
+     *
+     * @return bool
+     */
+    public function update(array $conditions, array $columns)
+    {
+        return $this->getModel()->update($conditions, $columns);
+    }
+
+    /**
+     * @param array $conditions
+     * @param array $columns
+     * @return mixed
+     */
+    public function updateOrCreate(array $conditions, array $columns)
+    {
+        return $this->getModel()->updateOrCreate($conditions, $columns);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function delete()
+    {
+        return $this->getQueryBuilder()->delete();
+    }
 }
