@@ -266,7 +266,7 @@ abstract class BaseRepository
 
     /**
      * @param Closure $closure
-     * 
+     *
      * @return $this
      */
     public function callback(Closure $closure)
