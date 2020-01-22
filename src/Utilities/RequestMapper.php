@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Utilities\Contracts;
+namespace TheNandan\TheRepository\Utilities;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
