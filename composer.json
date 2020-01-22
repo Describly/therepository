@@ -32,6 +32,11 @@
 	},
 	"require-dev": {
 	},
+	"autoload": {
+		"psr-4": {
+			"TheNandan\\TheRepository\\": "thenandan/therepository/src/"
+		}
+	},
 	"extra": {
 		"laravel": {
 			"providers": [
