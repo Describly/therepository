@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Utilities;
+namespace TheNandan\TheRepository\Utilities\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
