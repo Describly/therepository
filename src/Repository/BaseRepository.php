@@ -4,8 +4,6 @@ namespace TheNandan\TheRepository\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Closure;
 use TheNandan\TheRepository\Traits\ConditionalTrait;
 use TheNandan\TheRepository\Traits\ManipulationTrait;
 
