@@ -2,6 +2,7 @@
 
 namespace TheNandan\TheRepository\Utilities\Contracts;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,19 @@ class RequestMapper
      * @param $model
      *
      * @return array
+     *
+     * @throws \Exception
      */
     public static function mapIntoArray(array $request, $model): array
     {
+        if (!($model instanceof Model)) {
+            try {
+                $model = app()->make($model);
+            } catch (\Exception $e) {
+                throw new \Exception('Given class ['.$model.'] is not a Laravel model or is not instantiable.');
+            }
+        }
+
 
     }
 }
