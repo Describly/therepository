@@ -67,7 +67,6 @@ class UserRepository extends BaseRepository
     }
 }
 ```
-Now you are good to go.
 
 ## Helper Methods
 ##### To apply condition -
@@ -162,13 +161,15 @@ class User extends Authenticatable implements HasRequestMapping
     }
 }
 ```
-Here you see we need to define `mapRequest` method in our model, this method returns an array
+Here you can see, we need to define `mapRequest` method in our model,
+this method returns an array
 where -
 - array key -> represent the column name
 - array value -> represent the key name in the request
 
-Now lets create & update user -
-Our controller will look like -
+Now, lets create and update the user table and see how we can use this awesome feature.
+
+Our controller will will have `update` & `store` method as below -
 ```php
 <?php
 
@@ -229,7 +230,7 @@ class UserController extends Controller
     }
 }
 ```
-Our Repository will look like -
+We will update out repository as below -
 ```php
 <?php
 
@@ -283,3 +284,5 @@ class UserRepository extends BaseRepository
     }
 }
 ```
+- Here in `create` method we need to provide the model object/class.
+- Here in `update` method we need to provide the old model, this method will ignore the keys where value is save in request and in database.
