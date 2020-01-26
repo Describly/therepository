@@ -285,4 +285,6 @@ class UserRepository extends BaseRepository
 }
 ```
 - Here in `create` method we need to provide the model object/class.
-- Here in `update` method we need to provide the old model, this method will ignore the keys where value is save in request and in database.
+- Here in `update` method we need to provide the old model, this method will ignore the keys where value is same in request and in database.
+##### Note:
+Any key which in not present in the request or not defined in the `mapRequest` method will be ignored.
