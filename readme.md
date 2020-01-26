@@ -52,7 +52,6 @@ Now replace `Model` with `User` model in constructor, class will look like -
 namespace App\Repositories;
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use TheNandan\TheRepository\Repository\BaseRepository;
 
 class UserRepository extends BaseRepository
@@ -60,11 +59,11 @@ class UserRepository extends BaseRepository
     /**
     * UserRepository constructor.
     *
-    * @param Model $model
+    * @param User $user
     */
-    public function __construct(User $model)
+    public function __construct(User $user)
     {
-        parent::__construct($model);
+        parent::__construct($user);
     }
 }
 ```
@@ -106,6 +105,181 @@ Now you are good to go.
 
 ## Request Mapper
 This feature removes the hassle of manually checking and mapping the each filed while creating/updating.
+ To use this our model must implement the `HasRequestMapping` interface.
+ Now user model will look like -
+ ```php
+<?php
 
+namespace App;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use TheNandan\TheRepository\Utilities\Contracts\HasRequestMapping;
 
+class User extends Authenticatable implements HasRequestMapping
+{
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'password'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * @inheritDoc
+     */
+    public function mapRequest(): array
+    {
+        return [
+            'first_name' => 'firstName',
+            'last_name' => 'lastName',
+            'email' => 'emailAddress',
+            'password' => 'userPassword'
+        ];
+    }
+}
+```
+Here you see we need to define `mapRequest` method in our model, this method returns an array
+where -
+- array key -> represent the column name
+- array value -> represent the key name in the request
+
+Now lets create & update user -
+Our controller will look like -
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
+
+/**
+ * Class UserController
+ *
+ * @package App\Http\Controllers
+ */
+class UserController extends Controller
+{
+    /**
+     * @var UserRepository $userRepository
+     */
+    private $userRepository;
+
+    /**
+     * UserController constructor.
+     *
+     * @param UserRepository $userRepository
+     */
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * This method update the user data into the database
+     *
+     * @param int $id
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function update($id, Request $request)
+    {
+        return $this->userRepository->updateUser($id, $request);
+    }
+
+    /**
+     * This method stores the new user data into the database
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function store(Request $request)
+    {
+        return $this->userRepository->createUser($request);
+    }
+}
+```
+Our Repository will look like -
+```php
+<?php
+
+namespace App\Repositories;
+
+use App\User;
+use Illuminate\Http\Request;
+use TheNandan\TheRepository\Repository\BaseRepository;
+use TheNandan\TheRepository\Utilities\RequestMapper;
+
+class UserRepository extends BaseRepository
+{
+    /**
+    * UserRepository constructor.
+    *
+    * @param User $user
+    */
+    public function __construct(User $user)
+    {
+        parent::__construct($user);
+    }
+
+    /**
+     * Create the new user
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function createUser(Request $request)
+    {
+        return $this->create(RequestMapper::mapIntoArray($request->toArray(), $this->getModel()));
+    }
+
+    /**
+     * Update the user data
+     *
+     * @param $userId
+     * @param Request $request
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function updateUser($userId, Request $request)
+    {
+        $user = $this-$this->fetchById($userId);
+        return $this->create(RequestMapper::mapIntoArray($request->toArray(), $user));
+    }
+}
+```
