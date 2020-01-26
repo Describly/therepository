@@ -4,6 +4,7 @@ namespace TheNandan\TheRepository\Traits;
 
 use Illuminate\Support\Collection;
 use Closure;
+use TheNandan\TheRepository\Dictionaries\Order;
 
 /**
  * Trait ConditionalTrait
@@ -190,6 +191,12 @@ trait ConditionalTrait
     public function callback(Closure $closure)
     {
         $this->setQueryBuilder($this->getQueryBuilder()->where($closure));
+        return $this;
+    }
+
+    public function orderBy($column, $order = Order::ASC)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->orderBy($column, $order));
         return $this;
     }
 }
