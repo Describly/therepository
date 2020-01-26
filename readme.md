@@ -1,5 +1,9 @@
 # Laravel Repository [TheRepository]
-This laravel repository provides some common functions and/or functionality that almost every project needed.
+This laravel package provides various feature -
+- `Repository` - This is used abstracts the data layer.
+- `Request Mapper` - This is used to maps the request data with model.
+
+
 
 ## Requirements:
 - Laravel 5.6+
@@ -13,7 +17,7 @@ composer require thenandan/therepository
 
 ## Creating a Repository
 To create a repository run -
-```php
+```bash
 php artisan make:repository UserRepository
 ```
 This command will create UserRepository class inside `app\Repositories` directory.
@@ -100,5 +104,8 @@ Now you are good to go.
 - ``latest($column = null)`` - Works as `latest` method in Laravel
 - ``oldest($column = null)`` - Works as `oldest` method in Laravel
 
-### Note
-There is more feature and method to come so please keep looking.
+## Request Mapper
+This feature removes the hassle of manually checking and mapping the each filed while creating/updating.
+
+
+
