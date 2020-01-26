@@ -11,6 +11,61 @@ To get started, install TheRepository via composer:
 composer require thenandan/therepository
 ```
 
+## Creating a Repository
+To create a repository run -
+```php
+php artisan make:repository UserRepository
+```
+This command will create UserRepository class inside `app\Repositories` directory.
+Class structure will be as below -
+```php
+<?php
+
+namespace App\Repositories;
+
+use Illuminate\Database\Eloquent\Model;
+use TheNandan\TheRepository\Repository\BaseRepository;
+
+class UserRepository extends BaseRepository
+{
+    /**
+    * UserRepository constructor.
+    *
+    * @param Model $model
+    */
+    public function __construct(Model $model)
+    {
+        parent::__construct($model);
+    }
+
+}
+```
+
+Now replace `Model` with `User` model in constructor, class will look like -
+```php
+<?php
+
+namespace App\Repositories;
+
+use App\User;
+use Illuminate\Database\Eloquent\Model;
+use TheNandan\TheRepository\Repository\BaseRepository;
+
+class UserRepository extends BaseRepository
+{
+    /**
+    * UserRepository constructor.
+    *
+    * @param Model $model
+    */
+    public function __construct(User $model)
+    {
+        parent::__construct($model);
+    }
+}
+```
+Now you are good to go.
+
 ## Helper Methods
 ##### To apply condition -
 - condition($column, $operator = null, $value = null)
@@ -30,20 +85,20 @@ composer require thenandan/therepository
 - callback(Closure $closure)
 - orderBy($column, $order = Order::ASC)
 
-##### To Create/Update/Delete
+##### To Create/Update/Delete -
 - create(array $columns)
 - createMultiple(array $columns)
 - update(array $conditions, array $columns)
 - updateOrCreate(array $conditions, array $columns)
 - delete()
 
-##### To fetch the data
-- ``fetchOne(array $columns = ['*'])`` - Works as ``first`` method in Laravel
-- ``fetch(array $columns = ['*'])``  - Works as ``get`` method in Laravel
-- ``fetchById($id, array $columns = ['*'])``  Works as ``find`` method in Laravel
+##### To fetch the data -
+- ``fetchOne(array $columns = ['*'])`` - Works as `first` method in Laravel
+- ``fetch(array $columns = ['*'])``  - Works as `get` method in Laravel
+- ``fetchById($id, array $columns = ['*'])``  Works as `find` method in Laravel
 - ``fetchByKey(string $key, string $value, array $columns = ['*'])`` - Returns collection
-- ``latest($column = null)`` - Works as ``latest`` method in Laravel
-- ``oldest($column = null)`` - Works as ``oldest`` method in Laravel
+- ``latest($column = null)`` - Works as `latest` method in Laravel
+- ``oldest($column = null)`` - Works as `oldest` method in Laravel
 
 ### Note
 There is more feature and method to come so please keep looking.
