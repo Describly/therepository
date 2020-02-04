@@ -280,7 +280,7 @@ class UserRepository extends BaseRepository
     public function updateUser($userId, Request $request)
     {
         $user = $this-$this->fetchById($userId);
-        return $this->create(RequestMapper::mapIntoArray($request->toArray(), $user));
+        return $this->update(['id' => $userId], RequestMapper::mapIntoArray($request->toArray(), $user));
     }
 }
 ```
