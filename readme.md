@@ -114,9 +114,9 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use TheNandan\TheRepository\Utilities\Contracts\HasRequestMapping;
+use TheNandan\TheRepository\Utilities\Contracts\TheRepositoryInterface;
 
-class User extends Authenticatable implements HasRequestMapping
+class User extends Authenticatable implements TheRepositoryInterface
 {
     use Notifiable;
 

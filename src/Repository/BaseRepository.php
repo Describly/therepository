@@ -4,8 +4,8 @@ namespace TheNandan\TheRepository\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use TheNandan\TheRepository\Traits\ConditionalTrait;
-use TheNandan\TheRepository\Traits\ManipulationTrait;
+use TheNandan\TheRepository\Repository\Traits\ConditionalTrait;
+use TheNandan\TheRepository\Repository\Traits\ManipulationTrait;
 use TheNandan\TheRepository\Repository\Traits\PaginationTrait;
 
 /**

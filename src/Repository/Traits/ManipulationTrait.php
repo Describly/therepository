@@ -14,21 +14,37 @@ use Closure;
  */
 trait ManipulationTrait
 {
+    use RequestMapperTrait;
+
     /**
      * @param array $columns
+     * @param boolean $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function create(array $columns)
+    public function create(array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
         return $this->getModel()->create($columns);
     }
 
     /**
      * @param array $columns
+     * @param bool $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function createMultiple(array $columns)
+    public function createMultiple(array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $rows = [];
+            foreach ($columns as $row) {
+                $rows = $this->mapIntoArray($row);
+            }
+            $columns = $rows;
+        }
         return $this->getModel()->insert($columns);
     }
 
@@ -36,20 +52,30 @@ trait ManipulationTrait
      * @param array $conditions
      * @param array $columns
      *
+     * @param bool $mappingRequired
      * @return bool
+     * @throws \Exception
      */
-    public function update(array $conditions, array $columns)
+    public function update(array $conditions, array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
         return $this->getModel()->update($conditions, $columns);
     }
 
     /**
      * @param array $conditions
      * @param array $columns
+     * @param bool $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function updateOrCreate(array $conditions, array $columns)
+    public function updateOrCreate(array $conditions, array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
         return $this->getModel()->updateOrCreate($conditions, $columns);
     }
 

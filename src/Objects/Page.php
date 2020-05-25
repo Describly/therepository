@@ -5,7 +5,7 @@ namespace TheNandan\TheRepository\Objects;
 class Page
 {
     private $searchTerm;
-    private $perPage = 15;
+    private $perPage = 10;
     private $sortBy = [];
     private $page = 1;
 
