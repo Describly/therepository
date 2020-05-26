@@ -47,11 +47,11 @@ abstract class BaseRepository
     /**
      * @param $queryBuilder
      *
-     * @return mixed
+     * @return void
      */
     public function setQueryBuilder($queryBuilder)
     {
-        return $this->queryBuilder = $queryBuilder;
+        $this->queryBuilder = $queryBuilder;
     }
 
     /**

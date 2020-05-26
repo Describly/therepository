@@ -5,7 +5,6 @@ namespace TheNandan\TheRepository\Repository\Traits;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Closure;
 
 /**
  * Trait ManipulationTrait
@@ -61,7 +60,7 @@ trait ManipulationTrait
         if ($mappingRequired) {
             $columns = $this->mapIntoArray($columns);
         }
-        return $this->getModel()->update($conditions, $columns);
+        return $this->getModel()->where($conditions)->update($columns);
     }
 
     /**
@@ -80,11 +79,16 @@ trait ManipulationTrait
     }
 
     /**
+     * @param null $id
+     *
      * @return mixed
      */
-    public function delete()
+    public function delete($id = null)
     {
-        return $this->getQueryBuilder()->delete();
+        if (null === $id) {
+            return $this->getQueryBuilder()->delete();
+        }
+         return $this->getQueryBuilder()->where('id', $id)->delete();
     }
 
 

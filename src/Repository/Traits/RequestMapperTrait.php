@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 trait RequestMapperTrait
 {
     /**
-     * This method maps the request fields with the table columns
+     * This method maps the request fields with the table columns into array
      *
      * @param array $request
      * @return array
@@ -25,6 +25,26 @@ trait RequestMapperTrait
             }
         }
         return $data;
+    }
+
+    /**
+     * This method maps the request fields with the table columns into object
+     *
+     * @param array $request
+     * @return Model
+     *
+     * @throws \Exception
+     */
+    private function mapIntoModel(array $request): Model
+    {
+        $model = $this->validateModelAndGetModel();
+        $keys = $model->mapRequestFields();
+        foreach ($keys as $k => $v) {
+            if (array_key_exists($v, $request) || $model->$k !== $request[$v]) {
+                $model->$k = $request[$v];
+            }
+        }
+        return $model;
     }
 
     /**

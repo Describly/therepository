@@ -10,4 +10,11 @@ interface TheRepositoryInterface
      * @return array
      */
     public function mapRequestFields(): array ;
+
+    /**
+     * This method maps the list of request sortable keys with table columns
+     *
+     * @return array
+     */
+    //public function mapSortableFields(): array ;
 }
