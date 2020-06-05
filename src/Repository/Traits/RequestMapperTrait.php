@@ -20,7 +20,7 @@ trait RequestMapperTrait
         $keys = $model->mapRequestFields();
         $data = [];
         foreach ($keys as $k => $v) {
-            if (array_key_exists($v, $request) || $model->$k !== $request[$v]) {
+            if (array_key_exists($v, $request)) {
                 $data[$k] = $request[$v];
             }
         }

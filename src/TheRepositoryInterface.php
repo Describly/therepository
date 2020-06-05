@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Utilities\Contracts;
+namespace TheNandan\TheRepository;
 
 interface TheRepositoryInterface
 {
@@ -16,5 +16,12 @@ interface TheRepositoryInterface
      *
      * @return array
      */
-    //public function mapSortableFields(): array ;
+    public function mapSortableFields(): array ;
+
+    /**
+     * This method used to define the searchable columns
+     *
+     * @return array
+     */
+    public function setSearchableFields(): array ;
 }
