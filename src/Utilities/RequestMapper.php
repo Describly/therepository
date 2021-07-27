@@ -5,7 +5,7 @@ namespace TheNandan\TheRepository\Utilities;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use TheNandan\TheRepository\Utilities\Contracts\HasRequestMapping;
+use TheNandan\TheRepository\Utilities\Contracts\TheRepositoryInterface;
 
 /**
  * Class RequestMapper

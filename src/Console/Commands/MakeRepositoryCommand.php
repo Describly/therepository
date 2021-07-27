@@ -28,7 +28,7 @@ class MakeRepositoryCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'Repository';
+    protected $type = 'Repositories';
 
     /**
      * @return bool|void|null
@@ -69,14 +69,14 @@ class MakeRepositoryCommand extends GeneratorCommand
     }
 
     /**
-     * Get the full namespace for a given class, without the class name.
+     * Get the default namespace for the class.
      *
-     * @param  string  $name
+     * @param  string  $rootNamespace
      * @return string
      */
-    protected function getNamespace($name)
+    protected function getDefaultNamespace($rootNamespace)
     {
-        return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\').'\Repositories';
+        return $rootNamespace.'\\Repositories';
     }
 
     /**
@@ -87,18 +87,5 @@ class MakeRepositoryCommand extends GeneratorCommand
     protected function getRepositoryClass()
     {
         return Str::studly(class_basename($this->argument('name')));
-    }
-
-    /**
-     * Get the destination class path.
-     *
-     * @param  string  $name
-     * @return string
-     */
-    protected function getPath($name)
-    {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
-
-        return $this->laravel['path'].'/Repositories/'.str_replace('\\', '/', $name).'.php';
     }
 }
