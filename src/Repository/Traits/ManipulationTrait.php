@@ -66,15 +66,11 @@ trait ManipulationTrait
     /**
      * @param array $conditions
      * @param array $columns
-     * @param bool $mappingRequired
      * @return mixed
      * @throws \Exception
      */
-    public function updateOrCreate(array $conditions, array $columns, $mappingRequired = true)
+    public function updateOrCreate(array $conditions, array $columns)
     {
-        if ($mappingRequired) {
-            $columns = $this->mapIntoArray($columns);
-        }
         return $this->getModel()->updateOrCreate($conditions, $columns);
     }
 

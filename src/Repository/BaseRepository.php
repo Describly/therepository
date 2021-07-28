@@ -15,7 +15,7 @@ use IamKeshariNandan\TheRepository\Repository\Traits\PaginationTrait;
  */
 abstract class BaseRepository
 {
-    use ManipulationTrait, ConditionalTrait, PaginationTrait;
+    use PaginationTrait, ManipulationTrait;
     /**
      * @var Builder
      */
