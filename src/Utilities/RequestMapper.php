@@ -1,11 +1,8 @@
 <?php
 
-namespace TheNandan\TheRepository\Utilities;
+namespace IamKeshariNandan\TheRepository\Utilities;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use TheNandan\TheRepository\Utilities\Contracts\HasRequestMapping;
 
 /**
  * Class RequestMapper

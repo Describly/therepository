@@ -1,6 +1,6 @@
 <?php
 
-namespace IamKeshariNandan\TheRepository\Traits;
+namespace IamKeshariNandan\TheRepository\Repository\Traits;
 
 use Illuminate\Support\Collection;
 use Closure;

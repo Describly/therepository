@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use Illuminate\Database\Eloquent\Model;
-use TheNandan\TheRepository\Repository\BaseRepository;
+use IamKeshariNandan\TheRepository\Repository\BaseRepository;
 
 class RepositoryClass extends BaseRepository
 {

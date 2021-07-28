@@ -1,11 +1,12 @@
 <?php
 
-namespace TheNandan\TheRepository\Repository;
+namespace IamKeshariNandan\TheRepository\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use TheNandan\TheRepository\Traits\ConditionalTrait;
-use TheNandan\TheRepository\Traits\ManipulationTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\ConditionalTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\ManipulationTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\PaginationTrait;
 
 /**
  * Class TheRepository
@@ -14,7 +15,7 @@ use TheNandan\TheRepository\Traits\ManipulationTrait;
  */
 abstract class BaseRepository
 {
-    use ManipulationTrait, ConditionalTrait;
+    use ManipulationTrait, ConditionalTrait, PaginationTrait;
     /**
      * @var Builder
      */
@@ -38,7 +39,7 @@ abstract class BaseRepository
     /**
      * @return mixed
      */
-    public function getQueryBuilder(): Builder
+    public function getQueryBuilder()
     {
         return $this->queryBuilder;
     }
@@ -46,11 +47,11 @@ abstract class BaseRepository
     /**
      * @param $queryBuilder
      *
-     * @return mixed
+     * @return void
      */
     public function setQueryBuilder($queryBuilder)
     {
-        return $this->queryBuilder = $queryBuilder;
+        $this->queryBuilder = $queryBuilder;
     }
 
     /**

@@ -1,11 +1,10 @@
 <?php
 
-namespace IamKeshariNandan\TheRepository\Traits;
+namespace IamKeshariNandan\TheRepository\Repository\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Closure;
 
 /**
  * Trait ManipulationTrait
@@ -14,21 +13,37 @@ use Closure;
  */
 trait ManipulationTrait
 {
+    use RequestMapperTrait;
+
     /**
      * @param array $columns
+     * @param boolean $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function create(array $columns)
+    public function create(array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
         return $this->getModel()->create($columns);
     }
 
     /**
      * @param array $columns
+     * @param bool $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function createMultiple(array $columns)
+    public function createMultiple(array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $rows = [];
+            foreach ($columns as $row) {
+                $rows = $this->mapIntoArray($row);
+            }
+            $columns = $rows;
+        }
         return $this->getModel()->insert($columns);
     }
 
@@ -36,29 +51,44 @@ trait ManipulationTrait
      * @param array $conditions
      * @param array $columns
      *
+     * @param bool $mappingRequired
      * @return bool
+     * @throws \Exception
      */
-    public function update(array $conditions, array $columns)
+    public function update(array $conditions, array $columns, $mappingRequired = true)
     {
-        return $this->getModel()->update($conditions, $columns);
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
+        return $this->getModel()->where($conditions)->update($columns);
     }
 
     /**
      * @param array $conditions
      * @param array $columns
+     * @param bool $mappingRequired
      * @return mixed
+     * @throws \Exception
      */
-    public function updateOrCreate(array $conditions, array $columns)
+    public function updateOrCreate(array $conditions, array $columns, $mappingRequired = true)
     {
+        if ($mappingRequired) {
+            $columns = $this->mapIntoArray($columns);
+        }
         return $this->getModel()->updateOrCreate($conditions, $columns);
     }
 
     /**
+     * @param null $id
+     *
      * @return mixed
      */
-    public function delete()
+    public function delete($id = null)
     {
-        return $this->getQueryBuilder()->delete();
+        if (null === $id) {
+            return $this->getQueryBuilder()->delete();
+        }
+         return $this->getQueryBuilder()->where('id', $id)->delete();
     }
 
 

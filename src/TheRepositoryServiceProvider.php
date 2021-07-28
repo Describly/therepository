@@ -1,9 +1,13 @@
 <?php
 
-namespace TheNandan\TheRepository;
+namespace IamKeshariNandan\TheRepository;
 
 use Illuminate\Support\ServiceProvider;
-use TheNandan\TheRepository\Console\Commands\MakeRepositoryCommand;
+use IamKeshariNandan\TheRepository\Console\Commands\MakeRepositoryCommand;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use IamKeshariNandan\TheRepository\Http\Middleware\RequestMapperMiddleware;
+use IamKeshariNandan\TheRepository\Objects\Page;
 
 /**
  * Class TheRepositoryServiceProvider
@@ -19,17 +23,20 @@ class TheRepositoryServiceProvider extends ServiceProvider
     {
         // Register commands
         $this->registerCommands();
+        $this->app->singleton(Page::class);
     }
 
     /**
-     *
+     * @throws BindingResolutionException
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'therepository.config');
+        $this->pushMiddleware();
+        $this->mergeConfigFrom(__DIR__ . '/../config/therepository.php', 'therepository');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'therepository');
+        $this->publishes([
+            __DIR__ . '/../config/therepository.php' => config_path('therepository.php'),
+        ]);
     }
 
     /**
@@ -44,4 +51,12 @@ class TheRepositoryServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
+    public function pushMiddleware()
+    {
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->pushMiddleware(RequestMapperMiddleware::class);
+    }
 }
