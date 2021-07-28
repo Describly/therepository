@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Traits;
+namespace IamKeshariNandan\TheRepository\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

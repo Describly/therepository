@@ -1,13 +1,13 @@
 <?php
 
-namespace TheNandan\TheRepository;
+namespace IamKeshariNandan\TheRepository;
 
 use Illuminate\Support\ServiceProvider;
-use TheNandan\TheRepository\Console\Commands\MakeRepositoryCommand;
+use IamKeshariNandan\TheRepository\Console\Commands\MakeRepositoryCommand;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use TheNandan\TheRepository\Http\Middleware\RequestMapperMiddleware;
-use TheNandan\TheRepository\Objects\Page;
+use IamKeshariNandan\TheRepository\Http\Middleware\RequestMapperMiddleware;
+use IamKeshariNandan\TheRepository\Objects\Page;
 
 /**
  * Class TheRepositoryServiceProvider

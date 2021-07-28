@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Console\Commands;
+namespace IamKeshariNandan\TheRepository\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository;
+namespace IamKeshariNandan\TheRepository;
 
 interface TheRepositoryInterface
 {

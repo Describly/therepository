@@ -1,10 +1,10 @@
 <?php
 
-namespace TheNandan\TheRepository\Dictionaries;
+namespace IamKeshariNandan\TheRepository\Dictionaries;
 
 /**
  * Class OrderBy
- * @package TheNandan\TheRepository\Dictionaries
+ * @package IamKeshariNandan\TheRepository\Dictionaries
  */
 final class Order
 {

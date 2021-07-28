@@ -1,10 +1,10 @@
 <?php
 
-namespace TheNandan\TheRepository\Repository\Traits;
+namespace IamKeshariNandan\TheRepository\Repository\Traits;
 
 use Illuminate\Support\Collection;
 use Closure;
-use TheNandan\TheRepository\Dictionaries\Order;
+use IamKeshariNandan\TheRepository\Dictionaries\Order;
 
 /**
  * Trait ConditionalTrait

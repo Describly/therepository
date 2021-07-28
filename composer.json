@@ -1,13 +1,13 @@
 {
-	"name": "thenandan/therepository",
+	"name": "iamkesharinandan/therepository",
 	"description": "Awesome Laravel Repository",
 	"type": "laravel-library",
 	"license": "proprietary",
 	"authors": [
 		{
 			"name": "Keshari Nandan",
-			"email": "thenandan4@gmail.com",
-			"homepage": "https://github.com/thenandan"
+			"email": "iamkesharinandan@gmail.com",
+			"homepage": "https://github.com/iamkesharinandan"
 		}
 	],
 	"minimum-stability": "stable",
@@ -38,7 +38,7 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"TheNandan\\TheRepository\\TheRepositoryServiceProvider"
+				"IamKeshariNandan\\TheRepository\\TheRepositoryServiceProvider"
 			]
 		}
 	}

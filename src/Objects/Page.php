@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Objects;
+namespace IamKeshariNandan\TheRepository\Objects;
 
 class Page
 {

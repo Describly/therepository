@@ -1,9 +1,9 @@
 <?php
 
-namespace TheNandan\TheRepository\Repository\Traits;
+namespace IamKeshariNandan\TheRepository\Repository\Traits;
 
 use Illuminate\Support\Facades\DB;
-use TheNandan\TheRepository\Objects\Page;
+use IamKeshariNandan\TheRepository\Objects\Page;
 
 trait PaginationTrait
 {

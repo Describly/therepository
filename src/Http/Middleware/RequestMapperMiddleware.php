@@ -1,6 +1,6 @@
 <?php
 
-namespace TheNandan\TheRepository\Http\Middleware;
+namespace IamKeshariNandan\TheRepository\Http\Middleware;
 
 use Closure;
 use TheNandan\TheRepository\Objects\Page;

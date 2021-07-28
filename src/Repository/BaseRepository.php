@@ -1,12 +1,12 @@
 <?php
 
-namespace TheNandan\TheRepository\Repository;
+namespace IamKeshariNandan\TheRepository\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use TheNandan\TheRepository\Repository\Traits\ConditionalTrait;
-use TheNandan\TheRepository\Repository\Traits\ManipulationTrait;
-use TheNandan\TheRepository\Repository\Traits\PaginationTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\ConditionalTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\ManipulationTrait;
+use IamKeshariNandan\TheRepository\Repository\Traits\PaginationTrait;
 
 /**
  * Class TheRepository
