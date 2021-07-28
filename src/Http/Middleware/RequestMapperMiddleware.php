@@ -3,7 +3,7 @@
 namespace IamKeshariNandan\TheRepository\Http\Middleware;
 
 use Closure;
-use TheNandan\TheRepository\Objects\Page;
+use IamKeshariNandan\TheRepository\Objects\Page;
 
 class RequestMapperMiddleware
 {
