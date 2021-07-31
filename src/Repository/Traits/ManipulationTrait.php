@@ -145,4 +145,17 @@ trait ManipulationTrait
     {
         return $this->getQueryBuilder()->oldest($column);
     }
+
+    /**
+     * This method return the first object if exists or create the new and returns that
+     *
+     * @param array $condition
+     * @param array $fields
+     *
+     * @return mixed
+     */
+    public function fetchOrNew(array $condition, array $fields = [])
+    {
+        return $this->getModel()->firstOrNew($condition, $fields);
+    }
 }
