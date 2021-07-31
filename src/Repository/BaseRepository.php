@@ -15,7 +15,7 @@ use IamKeshariNandan\TheRepository\Repository\Traits\PaginationTrait;
  */
 abstract class BaseRepository
 {
-    use PaginationTrait, ManipulationTrait;
+    use PaginationTrait, ManipulationTrait, ConditionalTrait;
     /**
      * @var Builder
      */
@@ -81,5 +81,16 @@ abstract class BaseRepository
     public function getModel(): Model
     {
         return $this->model;
+    }
+
+    /**
+     * @param $relations
+     * @param null $callback
+     * @return $this
+     */
+    public function withRelation($relations, $callback = null)
+    {
+        $this->setQueryBuilder($this->getQueryBuilder()->with($relations, $callback));
+        return $this;
     }
 }
