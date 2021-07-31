@@ -84,13 +84,12 @@ abstract class BaseRepository
     }
 
     /**
-     * @param $relations
-     * @param null $callback
+     * @param array $relations
      * @return $this
      */
-    public function withRelation($relations, $callback = null)
+    public function withRelation(array $relations = [])
     {
-        $this->setQueryBuilder($this->getQueryBuilder()->with($relations, $callback));
+        $this->setQueryBuilder($this->getQueryBuilder()->with($relations));
         return $this;
     }
 }
