@@ -147,7 +147,7 @@ trait ManipulationTrait
     }
 
     /**
-     * This method return the first object if exists or create the new and returns that
+     * This method return the first object if exists or return new instance and returns that
      *
      * @param array $condition
      * @param array $fields
@@ -157,5 +157,18 @@ trait ManipulationTrait
     public function fetchOrNew(array $condition, array $fields = [])
     {
         return $this->getModel()->firstOrNew($condition, $fields);
+    }
+
+    /**
+     * This method return the first object if exists or create the new and returns that
+     *
+     * @param array $condition
+     * @param array $fields
+     *
+     * @return mixed
+     */
+    public function fetchOrCreate(array $condition, array $fields = [])
+    {
+        return $this->getModel()->firstOrCreate($condition, $fields);
     }
 }
